@@ -29,7 +29,8 @@ const SITE = {
 
   // Background music (optional). Drop an mp3 at this path. If it's missing,
   // the music button just shows a friendly message instead of breaking.
-  musicFile: "assets/music/happy-birthday-song-upan-dinaya-ada-obage-centigradz.mp3",
+  // Cache-busting query ensures the newest MP3 is always fetched.
+  musicFile: "assets/music/happy-birthday-song-upan-dinaya-ada-obage-centigradz.mp3?v=20261115",
 
   // ---- HOME: countdown messages -----------------------------------------
   countdown: {
