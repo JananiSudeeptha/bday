@@ -12,11 +12,11 @@
    ========================================================================== */
 
 const GALLERY_PHOTOS = [
-  { src: "assets/photos/photo1.jpg", alt: "{name} smiling at the camera", caption: "Exhibit A: allegedly 33." },
-  { src: "assets/photos/photo2.jpg", alt: "{name} on a night out", caption: "Bouncer: One Screw at a time" },
-  { src: "assets/photos/photo3.jpg", alt: "{name} on holiday", caption: "Peak youth. Or a Tuesday. Hard to tell." },
-  { src: "assets/photos/photo4.jpg", alt: "{name} looking relaxed", caption: "Moisturised. Unbothered. Thriving." },
-  { src: "assets/photos/photo5.jpg", alt: "An old photo of {name}", caption: "Same face since forever. Scientists baffled." },
+  { src: "assets/photos/photo1.JPG", alt: "{name} smiling at the camera", caption: "Exhibit A: allegedly 33." },
+  { src: "assets/photos/photo2.JPG", alt: "{name} on a night out", caption: "Bouncer: One Screw at a time" },
+  { src: "assets/photos/photo3.JPG", alt: "{name} on holiday", caption: "Peak youth. Or a Tuesday. Hard to tell." },
+  { src: "assets/photos/photo4.JPG", alt: "{name} looking relaxed", caption: "Moisturised. Unbothered. Thriving." },
+  { src: "assets/photos/photo5.JPG", alt: "An old photo of {name}", caption: "Same face since forever. Scientists baffled." },
   { src: "assets/photos/photo6.jpeg", alt: "{name} with friends", caption: "Looks like the intern at his own party." },
 ];
 
