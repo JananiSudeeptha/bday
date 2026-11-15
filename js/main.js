@@ -518,23 +518,31 @@ const SITE = {
         if (!scannerAudioCtx) scannerAudioCtx = new AudioCtor();
         if (scannerAudioCtx.state === "suspended") scannerAudioCtx.resume();
 
-        function playTone(freq) {
+        function playBeep(freq, duration, volume) {
           const osc = scannerAudioCtx.createOscillator();
           const gain = scannerAudioCtx.createGain();
-          osc.type = "triangle";
+          osc.type = "square";
           osc.frequency.value = freq;
           gain.gain.setValueAtTime(0.0001, scannerAudioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.025, scannerAudioCtx.currentTime + 0.02);
-          gain.gain.exponentialRampToValueAtTime(0.0001, scannerAudioCtx.currentTime + 0.12);
+          gain.gain.exponentialRampToValueAtTime(volume, scannerAudioCtx.currentTime + 0.01);
+          gain.gain.exponentialRampToValueAtTime(0.0001, scannerAudioCtx.currentTime + duration);
           osc.connect(gain).connect(scannerAudioCtx.destination);
           osc.start();
-          osc.stop(scannerAudioCtx.currentTime + 0.14);
+          osc.stop(scannerAudioCtx.currentTime + duration + 0.02);
         }
 
-        playTone(1200);
+        const pattern = [1800, 2200, 2600, 1800, 2200, 2600];
+        let patternIndex = 0;
+        pattern.forEach(function (freq, index) {
+          setTimeout(function () {
+            playBeep(freq, 0.06, 0.02);
+          }, index * 90);
+        });
+
         scannerToneTimer = setInterval(function () {
-          playTone(1200 + Math.random() * 300);
-        }, 220);
+          playBeep(pattern[patternIndex % pattern.length], 0.05, 0.02);
+          patternIndex += 1;
+        }, 150);
       } catch (error) {
         /* Audio may be blocked or unavailable; continue without it. */
       }
