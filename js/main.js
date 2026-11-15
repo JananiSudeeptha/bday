@@ -504,6 +504,40 @@ const SITE = {
     const photo = root.querySelector("[data-scan-photo]");
     let running = false;
     let flicker = null;
+    let scannerAudioCtx = null;
+    let scannerToneTimer = null;
+
+    function startScannerSound() {
+      const AudioCtor = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtor) return;
+      if (!scannerAudioCtx) scannerAudioCtx = new AudioCtor();
+      if (scannerAudioCtx.state === "suspended") scannerAudioCtx.resume();
+
+      function playTone(freq) {
+        const osc = scannerAudioCtx.createOscillator();
+        const gain = scannerAudioCtx.createGain();
+        osc.type = "triangle";
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.0001, scannerAudioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.025, scannerAudioCtx.currentTime + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, scannerAudioCtx.currentTime + 0.12);
+        osc.connect(gain).connect(scannerAudioCtx.destination);
+        osc.start();
+        osc.stop(scannerAudioCtx.currentTime + 0.14);
+      }
+
+      playTone(1200);
+      scannerToneTimer = setInterval(function () {
+        playTone(1200 + Math.random() * 300);
+      }, 220);
+    }
+
+    function stopScannerSound() {
+      if (scannerToneTimer) {
+        clearInterval(scannerToneTimer);
+        scannerToneTimer = null;
+      }
+    }
 
     if (stamp) stamp.textContent = fill(SITE.scanStamp);
 
@@ -525,6 +559,7 @@ const SITE = {
       btn.disabled = true;
       root.classList.remove("is-error");
       root.classList.add("is-scanning");
+      startScannerSound();
       result.hidden = true;
       setProgress(0);
 
@@ -548,6 +583,7 @@ const SITE = {
           return;
         }
         clearInterval(flicker);
+        stopScannerSound();
         if (detected) detected.textContent = String(SITE.looksAge);
         setProgress(100);
         root.classList.remove("is-scanning");

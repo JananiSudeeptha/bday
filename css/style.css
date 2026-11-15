@@ -582,11 +582,14 @@ main {
   z-index: 2;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.95), var(--violet-2), rgba(255,255,255,0.95), transparent);
   box-shadow: 0 0 14px 4px rgba(168, 85, 247, 0.55);
-  opacity: 1;
+  opacity: 0;
   pointer-events: none;
-  animation: scan 1.1s ease-in-out infinite alternate;
+  transform: translateZ(0);
 }
-.is-scanning .scan-line { opacity: 1; }
+.is-scanning .scan-line {
+  opacity: 1;
+  animation: scan 1.05s ease-in-out infinite alternate;
+}
 .is-error .idcard-photo { animation: shake 0.5s ease; }
 
 .idcard-fields { margin: 0; display: grid; gap: 0.6rem; align-content: start; }
