@@ -10,7 +10,7 @@
 
 const SITE = {
   // The birthday legend
-  name: "Sweetu",
+  name: "Bay🐝",
   scannerName: "Nuwantha",
   age: 33,
   looksAge: 22,
@@ -21,7 +21,7 @@ const SITE = {
   timeZone: "Europe/London",
 
   // You! Shown in the footer and at the end of the letter
-  fromName: "Your Name",
+  fromName: "Janani",
 
   // Photo shown on the ID card in the age scanner. If the file is missing,
   // a stylish silhouette is shown instead.
@@ -55,7 +55,7 @@ const SITE = {
     { label: "Actual age (according to paperwork)", value: 33 },
     { label: "Age he looks", value: 22 },
     { label: "Age he acts when dessert arrives", value: 9 },
-    { label: "Age his knees report", value: 58 },
+    { label: "Age his knees report", value: 50 },
   ],
 
   // ---- WISHES: tap-to-flip notes -----------------------------------------
@@ -67,7 +67,7 @@ const SITE = {
     { tag: "Roast", text: "I hope you get asked for ID at least three times this year. You've earned the confusion. 😆" },
     { tag: "Sweet", text: "Thank you for being the person who makes every room louder, warmer and funnier. 😊" },
     { tag: "Roast", text: "May your back never crack louder than your laugh. 😵‍💫" },
-    { tag: "Sweet", text: "Wishing you a year of great food, long naps, and zero group-chat drama. 😍" },
+    { tag: "Sweet", text: "Wishing you a year of great food, long naps, and lesser work stress and life long love. 😍" },
     { tag: "Roast", text: "33 is just 23 with better taste and very strong opinions about lumbar support. 🤭" },
     { tag: "Sweet", text: "Wishing you a year full of peace, laughter, and a love story that feels right when it arrives. 🥳" },
   ],
@@ -645,11 +645,17 @@ const SITE = {
   function renderChart() {
     const chart = document.getElementById("age-chart");
     if (!chart) return;
-    const max = Math.max.apply(null, SITE.ageChart.map(function (r) { return r.value; })) * 1.1;
+    const max = 100;
+    const refValue = 33;
     chart.innerHTML = SITE.ageChart.map(function (row) {
+      const pct = Math.min(100, Math.max(0, Number(row.value) || 0));
+      const refPct = Math.min(100, Math.max(0, (refValue / max) * 100));
       return '<li class="bar-row">' +
         '<span class="bar-label">' + esc(fill(row.label)) + "</span>" +
-        '<span class="bar-track" aria-hidden="true"><span class="bar-fill" style="--w:' + ((row.value / max) * 100).toFixed(1) + '%"></span></span>' +
+        '<span class="bar-track" aria-hidden="true">' +
+          '<span class="bar-ref" style="left:' + refPct.toFixed(1) + '%"><span class="bar-ref-label">33</span></span>' +
+          '<span class="bar-fill" style="--w:' + pct.toFixed(1) + '%"></span>' +
+        '</span>' +
         '<span class="bar-value">' + esc(row.value) + "</span>" +
         "</li>";
     }).join("");

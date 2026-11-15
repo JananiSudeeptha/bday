@@ -36,7 +36,7 @@ const GIFT_CONFIG = {
 
     // Shown once the box opens
     revealTitle: "Surprise!",
-    revealText: "The gift is a secret. You'll have to come and find out in person, old man. No spoilers.",
+    revealText: "The gift is a secret. You'll have to come and find out in person, kiddo. No spoilers.",
   },
 };
 

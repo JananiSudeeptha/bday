@@ -37,55 +37,35 @@ const CARD_CONFIG = {
   const replayBtn = card.querySelector("[data-song-replay]");
 
   /* ---------- Text ---------- */
-  card.querySelector(".bcard-cover-title").textContent = B.fill(C.coverTitle);
-  card.querySelector(".bcard-cover-sub").textContent = B.fill(C.coverSub);
+  const coverTitle = card.querySelector(".bcard-cover-title");
+  const coverSub = card.querySelector(".bcard-cover-sub");
+  if (coverTitle) coverTitle.textContent = B.fill(C.coverTitle);
+  if (coverSub) coverSub.textContent = B.fill(C.coverSub);
   card.querySelector(".bcard-title").textContent = B.fill(C.title);
   card.querySelector(".bcard-msg").textContent = B.fill(C.message);
 
-  /* ---------- Bunting: one letter per flag on a sagging rope ---------- */
+  /* ---------- Banner: purple paper flags on a soft string ---------- */
   function renderBanner() {
     const host = card.querySelector(".banner");
     if (!host) return;
     const letters = Array.from(B.fill(C.banner));
-    const W = 600, H = 120;
-    const p0 = { x: 0, y: 14 }, p1 = { x: W / 2, y: 70 }, p2 = { x: W, y: 14 }; // quadratic rope
-    function pt(t) {
-      const u = 1 - t;
-      return {
-        x: u * u * p0.x + 2 * u * t * p1.x + t * t * p2.x,
-        y: u * u * p0.y + 2 * u * t * p1.y + t * t * p2.y,
-      };
-    }
-    function angle(t) {
-      const dx = 2 * (1 - t) * (p1.x - p0.x) + 2 * t * (p2.x - p1.x);
-      const dy = 2 * (1 - t) * (p1.y - p0.y) + 2 * t * (p2.y - p1.y);
-      return (Math.atan2(dy, dx) * 180) / Math.PI;
-    }
-    const fills = ["#A855F7", "#7C3AED", "#C084FC", "#8B5CF6", "#D946EF"];
-    const n = letters.length;
-    let flags = "";
-    let k = 0;
-    letters.forEach(function (ch, i) {
-      if (ch === " ") return;
-      const t = (i + 0.5) / n;
-      const p = pt(t);
-      const a = angle(t) * 0.6;
-      const w = Math.min(44, (W / n) * 0.92);
-      const h = w * 1.25;
-      flags +=
-        '<g transform="translate(' + p.x.toFixed(1) + " " + p.y.toFixed(1) + ") rotate(" + a.toFixed(1) + ')">' +
-          '<g class="flag" style="--d:' + (k * 0.18).toFixed(2) + 's">' +
-            '<path d="M' + (-w / 2) + " 0 L" + (w / 2) + " 0 L0 " + h.toFixed(1) + ' Z" fill="' + fills[k % fills.length] + '"/>' +
-            '<text x="0" y="' + (h * 0.44).toFixed(1) + '" text-anchor="middle" font-size="' + (w * 0.6).toFixed(1) + '">' + B.esc(ch) + "</text>" +
-          "</g>" +
-        "</g>";
-      k++;
+    const stringText = "";
+    const purpleFlags = ["#A678D8", "#B88AE3", "#8F67C8", "#C598E9", "#9D78D7", "#B27AE1"];
+    const items = [];
+    let offset = 0;
+
+    letters.forEach(function (ch, index) {
+      if (ch === " ") {
+        offset += 20;
+        return;
+      }
+
+      const flag = '<span class="banner-flag" style="--flag-color:' + purpleFlags[index % purpleFlags.length] + '; --flag-shift:' + offset + 'px; --flag-tilt:' + ((index % 2 === 0 ? -1 : 1) * (6 + (index % 4) * 1.5)) + 'deg; --flag-delay:' + (index * 0.08) + 's;">' + B.esc(ch) + '</span>';
+      items.push(flag);
+      offset += 18;
     });
-    host.innerHTML =
-      '<svg viewBox="0 0 ' + W + " " + H + '" aria-hidden="true" focusable="false">' +
-        '<path d="M' + p0.x + " " + p0.y + " Q" + p1.x + " " + p1.y + " " + p2.x + " " + p2.y + '" fill="none" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round"/>' +
-        flags +
-      "</svg>";
+
+    host.innerHTML = '<div class="banner-string" aria-hidden="true"></div><div class="banner-flags">' + items.join("") + '</div>';
   }
 
   /* ---------- Calendar for the birthday month, with a heart on the day ---------- */
@@ -139,46 +119,6 @@ const CARD_CONFIG = {
   }
   function spark(cx, cy, r, fill) {
     return '<path d="M' + cx + " " + (cy - r) + " Q" + cx + " " + cy + " " + (cx + r) + " " + cy + " Q" + cx + " " + cy + " " + cx + " " + (cy + r) + " Q" + cx + " " + cy + " " + (cx - r) + " " + cy + " Q" + cx + " " + cy + " " + cx + " " + (cy - r) + ' Z" fill="' + fill + '"/>';
-  }
-
-  function renderCoverArt() {
-    const host = card.querySelector(".bcard-cover-art");
-    if (!host) return;
-    const white = "#FFFFFF", cream = "#F5F3FF", pink = "#F0ABFC", lilac = "#C4B5FD", gold = "#FDE68A", plum = "#4C1D95";
-    const age = String(B.SITE.age);
-
-    const art =
-      // soft disc behind everything
-      '<circle cx="200" cy="200" r="150" fill="#FFFFFF" opacity="0.1"/>' +
-      // balloons
-      balloon(72, 86, pink, 0, 118, 230) + balloon(330, 64, lilac, -1.4, 290, 220) + balloon(352, 134, white, -2.3, 300, 236) +
-      // plate
-      '<ellipse cx="200" cy="318" rx="128" ry="12" fill="' + plum + '" opacity="0.25"/>' +
-      '<ellipse cx="200" cy="312" rx="120" ry="12" fill="' + white + '"/>' +
-      // bottom tier with drips
-      '<rect x="100" y="246" width="200" height="68" rx="16" fill="' + cream + '"/>' +
-      '<path d="M100 262 Q100 246 116 246 L284 246 Q300 246 300 262 L300 270 Q290 270 290 284 Q280 284 280 270 Q270 270 270 282 Q262 282 262 270 L238 270 Q238 288 226 288 Q214 288 214 270 L186 270 Q186 284 174 284 Q162 284 162 270 L138 270 Q138 286 126 286 Q114 286 114 270 L112 270 Q112 280 106 280 Q100 280 100 270 Z" fill="' + pink + '"/>' +
-      '<g fill="' + lilac + '"><circle cx="126" cy="300" r="4"/><circle cx="156" cy="300" r="4"/><circle cx="186" cy="300" r="4"/><circle cx="216" cy="300" r="4"/><circle cx="246" cy="300" r="4"/><circle cx="276" cy="300" r="4"/></g>' +
-      // top tier with drips
-      '<rect x="132" y="194" width="136" height="56" rx="14" fill="' + white + '"/>' +
-      '<path d="M132 208 Q132 194 146 194 L254 194 Q268 194 268 208 L268 214 Q260 214 260 226 Q252 226 252 214 L232 214 Q232 230 222 230 Q212 230 212 214 L188 214 Q188 228 178 228 Q168 228 168 214 L148 214 Q148 226 140 226 Q132 226 132 214 Z" fill="' + lilac + '"/>' +
-      // number candles
-      '<text x="200" y="186" text-anchor="middle" font-family="Quicksand, Nunito, sans-serif" font-weight="700" font-size="64" fill="' + gold + '" letter-spacing="2">' + B.esc(age) + "</text>" +
-      flame(176, 128, 0) + flame(224, 128, -0.6) +
-      // little laptop beside the plate
-      '<rect x="24" y="268" width="58" height="38" rx="5" fill="' + white + '"/>' +
-      '<rect x="30" y="274" width="46" height="26" rx="2" fill="' + lilac + '"/>' +
-      '<path d="M44 283 l -6 4 6 4 M62 283 l 6 4 -6 4 M56 280 l -6 14" fill="none" stroke="' + plum + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<rect x="16" y="306" width="74" height="7" rx="3.5" fill="' + white + '"/>' +
-      // confetti + sparks
-      confetti(150, 60, 14, 6, 25, gold, 0) + confetti(250, 40, 12, 6, -30, pink, -1) + confetti(118, 150, 12, 6, 60, white, -2) +
-      confetti(300, 180, 13, 6, -15, gold, -0.5) + confetti(60, 200, 12, 6, 40, lilac, -1.6) + confetti(370, 230, 12, 6, 70, pink, -2.4) +
-      confetti(200, 20, 12, 6, 10, lilac, -1.2) + confetti(330, 290, 12, 6, -45, gold, -0.3) + confetti(44, 330, 12, 6, 20, pink, -1.9) +
-      dot(130, 100, 4, white, -0.4) + dot(290, 110, 4, gold, -1.1) + dot(340, 330, 4, lilac, -0.8) + dot(100, 40, 3.5, pink, -1.7) +
-      dot(246, 140, 3.5, white, -2.1) + dot(378, 40, 4, gold, -0.2) + dot(26, 120, 3.5, white, -1.3) + dot(166, 330, 3.5, gold, -0.9) +
-      spark(104, 118, 7, white) + spark(286, 166, 6, white) + spark(366, 300, 7, white) + spark(228, 70, 5, gold);
-
-    host.innerHTML = '<svg viewBox="0 0 400 350" aria-hidden="true" focusable="false">' + art + "</svg>";
   }
 
   /* ---------- Happy Birthday: recording if present, otherwise a little synth tune ---------- */
@@ -312,7 +252,6 @@ const CARD_CONFIG = {
   if (replayBtn) replayBtn.addEventListener("click", function () { playSong(); });
   window.addEventListener("pagehide", stopSong);
 
-  renderCoverArt();
   renderBanner();
   renderCalendar();
   inside.setAttribute("aria-hidden", "true");
