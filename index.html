@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Happy 33rd Birthday!</title>
+  <meta name="description" content="A very official birthday website. Age verification pending.">
+  <meta name="theme-color" content="#F6F1FF">
+  <meta property="og:title" content="Happy 33rd Birthday! 💜">
+  <meta property="og:description" content="33? Sir, we're going to need to see some ID.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%9C%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.className += " js";</script>
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main">
+      <a class="brand" href="index.html">
+        <span><span data-name>Nuwantha</span> turns <span data-age>33</span></span>
+      </a>
+      <button class="music-btn" type="button" data-music-toggle aria-pressed="false">
+        <span class="music-icon" aria-hidden="true">♪</span><span class="music-label">Music off</span>
+      </button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="sr-only">Menu</span><span class="burger" aria-hidden="true"></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="wishes.html">Wishes</a></li>
+        <li><a href="gifts.html">Gifts</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero container">
+      <p class="eyebrow">Breaking news: local legend levels up</p>
+      <h1 class="hero-title">
+        <span class="line">Happy <span data-ordinal>33rd</span> Birthday,</span>
+        <span class="line name-line"><span data-name>Nuwantha</span> 💜</span>
+      </h1>
+      <span class="title-bar" aria-hidden="true"></span>
+      <p class="lead">33? Sir, we're going to need to see some ID.</p>
+    </section>
+
+    <section class="container section">
+      <div class="card countdown-card reveal" id="countdown-card">
+        <span class="card-emoji" aria-hidden="true">🎂</span>
+        <span class="card-kicker">Birthday report</span>
+        <h2>Birthday status</h2>
+        <div class="countdown" aria-live="off"></div>
+        <p class="countdown-msg" aria-live="polite">The birthday has officially started. Please ignore the dramatic pause and proceed directly to cake.</p>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="card scanner reveal" id="age-scanner">
+        <span class="card-emoji" aria-hidden="true">🪪</span>
+        <span class="card-kicker">Very official</span>
+        <h2>Age Verification Scanner 3000</h2>
+        <p>Extremely scientific facial age analysis. Please hold still and look young. (Easy for you, apparently.)</p>
+
+        <div class="scanner-body">
+          <div class="idcard" aria-hidden="true">
+            <div class="idcard-head"><span>Official age record</span><span class="led"></span></div>
+            <div class="idcard-body">
+              <div class="idcard-photo">
+                <img data-scan-photo alt="" decoding="async">
+                <div class="idcard-fallback">
+                  <svg viewBox="0 0 100 100" focusable="false">
+                    <circle class="sil-head" cx="50" cy="34" r="20"/>
+                    <path class="sil-body" d="M12 100 C12 72 28 60 50 60 C72 60 88 72 88 100 Z"/>
+                    <ellipse class="sil-shine" cx="42" cy="26" rx="6" ry="9" transform="rotate(-20 42 26)"/>
+                  </svg>
+                </div>
+                <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+                <span class="scan-line"></span>
+              </div>
+              <dl class="idcard-fields">
+                <div><dt>Name</dt><dd data-scanner-name>Nuwantha</dd></div>
+                <div><dt>Date of birth</dt><dd data-dob>16 Nov · year classified</dd></div>
+                <div><dt>Age on record</dt><dd><span data-age>33</span> (allegedly)</dd></div>
+                <div><dt>Age detected</dt><dd class="detected">--</dd></div>
+              </dl>
+            </div>
+            <span class="stamp">Mismatch</span>
+          </div>
+
+          <div class="scanner-readout">
+            <div class="progress" role="progressbar" aria-label="Scan progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <span class="progress-fill"></span>
+            </div>
+            <p class="scan-status" aria-live="polite">Scanner ready. Awaiting suspiciously youthful face.</p>
+            <p class="scan-result" aria-live="polite" hidden></p>
+            <button class="btn scan-btn" type="button">Scan his face</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="card reveal">
+        <span class="card-emoji" aria-hidden="true">📈</span>
+        <span class="card-kicker">Peer-reviewed</span>
+        <h2>Years old vs. years he looks</h2>
+        <ul class="age-chart" id="age-chart"></ul>
+        <p class="chart-note">Source: vibes. Margin of error: his skincare routine.</p>
+      </div>
+    </section>
+
+    <section class="container section cta reveal">
+      <h2 class="script">Okay, enough science.</h2>
+      <a class="btn btn-big" href="wishes.html">Start the celebration <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Made with love (and age jokes) by <span data-from>Your Name</span></p>
+  </footer>
+</body>
+</html>

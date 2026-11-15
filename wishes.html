@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Wishes · Happy 33rd Birthday!</title>
+  <meta name="description" content="Birthday wishes: some sweet, some... honest.">
+  <meta name="theme-color" content="#F6F1FF">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%9C%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.className += " js";</script>
+  <script src="js/main.js" defer></script>
+  <script src="js/card.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main">
+      <a class="brand" href="index.html">
+        <span><span data-name>Alex</span> turns <span data-age>33</span></span>
+      </a>
+      <button class="music-btn" type="button" data-music-toggle aria-pressed="false">
+        <span class="music-icon" aria-hidden="true">♪</span><span class="music-label">Music off</span>
+      </button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="sr-only">Menu</span><span class="burger" aria-hidden="true"></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="wishes.html" aria-current="page">Wishes</a></li>
+        <li><a href="gifts.html">Gifts</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="page-head container">
+      <h1>Birthday Wishes</h1>
+      <span class="title-bar" aria-hidden="true"></span>
+      <p>Tap a note to open it. Some are sweet. Some are... medically accurate.</p>
+    </section>
+
+    <section class="container section" aria-label="Birthday card">
+      <div class="bcard-wrap">
+        <div class="bcard" id="bcard">
+          <div class="bcard-inside" id="bcard-inside">
+            <div class="banner" aria-hidden="true"></div>
+            <h2 class="bcard-title" tabindex="-1">Happy Birthday!</h2>
+            <p class="bcard-msg"></p>
+            <div class="calendar"></div>
+            <div class="bcard-actions">
+              <button class="btn btn-ghost" type="button" data-song-replay><span aria-hidden="true">♪</span> Play it again</button>
+              <button class="link-btn" type="button" data-card-close>Close the card</button>
+            </div>
+          </div>
+          <button class="bcard-cover" type="button" aria-expanded="false" aria-controls="bcard-inside">
+            <span class="bcard-face bcard-cover-front">
+              <span class="bcard-cover-art" aria-hidden="true"></span>
+              <span class="bcard-cover-title">For Alex</span>
+              <span class="bcard-cover-sub">Tap to open</span>
+            </span>
+            <span class="bcard-face bcard-cover-back" aria-hidden="true"><span class="bcard-cover-back-heart">💜</span></span>
+          </button>
+        </div>
+      </div>
+      <p class="bcard-note">Sound on. It sings. 🎶</p>
+    </section>
+
+    <section class="container" aria-label="Wish cards">
+      <ul class="wish-grid" id="wish-grid"></ul>
+    </section>
+
+    <section class="container section">
+      <article class="card letter reveal" id="letter" aria-labelledby="letter-title">
+        <span class="card-emoji" aria-hidden="true">💌</span>
+        <span class="card-kicker">From the heart</span>
+        <h2 id="letter-title">Okay, one serious moment</h2>
+        <p class="letter-greeting">Dear name</p>
+        <div class="letter-body"></div>
+        <p class="letter-signoff">With love,</p>
+        <p class="letter-from" data-from>Your Name</p>
+      </article>
+    </section>
+
+    <div class="container next-step reveal">
+      <p>Wishes are nice. But you know what's nicer?</p>
+      <a class="btn btn-big" href="gifts.html">Presents <span aria-hidden="true">→</span></a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Made with love (and age jokes) by <span data-from>Your Name</span></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Gallery · Happy 33rd Birthday!</title>
+  <meta name="description" content="Photographic proof that this man refuses to age.">
+  <meta name="theme-color" content="#F6F1FF">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%9C%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.className += " js";</script>
+  <script src="js/main.js" defer></script>
+  <script src="js/gallery.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main">
+      <a class="brand" href="index.html">
+        <span><span data-name>Alex</span> turns <span data-age>33</span></span>
+      </a>
+      <button class="music-btn" type="button" data-music-toggle aria-pressed="false">
+        <span class="music-icon" aria-hidden="true">♪</span><span class="music-label">Music off</span>
+      </button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="sr-only">Menu</span><span class="burger" aria-hidden="true"></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="wishes.html">Wishes</a></li>
+        <li><a href="gifts.html">Gifts</a></li>
+        <li><a href="gallery.html" aria-current="page">Gallery</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="page-head container">
+      <h1>The Evidence</h1>
+      <span class="title-bar" aria-hidden="true"></span>
+      <p>Photographic proof that this man refuses to age. Tap a photo to zoom in on the crime scene.</p>
+    </section>
+
+    <section class="container" aria-label="Photos">
+      <ul class="polaroid-grid" id="gallery"></ul>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+    <div class="lightbox-backdrop" data-close></div>
+    <figure class="lightbox-figure">
+      <img class="lightbox-img" src="data:," alt="">
+      <div class="lightbox-missing"><span class="lightbox-missing-text">Photo not found</span></div>
+      <figcaption class="lightbox-caption"></figcaption>
+      <p class="lightbox-count" aria-live="polite"></p>
+    </figure>
+    <button class="lb-btn lb-close" type="button" data-close aria-label="Close photo viewer">&times;</button>
+    <button class="lb-btn lb-prev" type="button" aria-label="Previous photo">&lsaquo;</button>
+    <button class="lb-btn lb-next" type="button" aria-label="Next photo">&rsaquo;</button>
+  </div>
+
+  <footer class="site-footer">
+    <p>Made with love (and age jokes) by <span data-from>Your Name</span></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Gifts · Happy 33rd Birthday!</title>
+  <meta name="description" content="One box. Locked. Extremely suspicious.">
+  <meta name="theme-color" content="#F6F1FF">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%9C%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.className += " js";</script>
+  <script src="js/main.js" defer></script>
+  <script src="js/gifts.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main">
+      <a class="brand" href="index.html">
+        <span><span data-name>Alex</span> turns <span data-age>33</span></span>
+      </a>
+      <button class="music-btn" type="button" data-music-toggle aria-pressed="false">
+        <span class="music-icon" aria-hidden="true">♪</span><span class="music-label">Music off</span>
+      </button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="sr-only">Menu</span><span class="burger" aria-hidden="true"></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="wishes.html">Wishes</a></li>
+        <li><a href="gifts.html" aria-current="page">Gifts</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="page-head container">
+      <h1>The Secret Gift</h1>
+      <span class="title-bar" aria-hidden="true"></span>
+      <p>One box. Locked tight. Rumour has it the contents are worth more than your entire supply of joint supplements.</p>
+    </section>
+
+    <section class="container" aria-label="The locked gift">
+      <div class="secret-stage" id="secret-stage"></div>
+
+      <div class="card unlock-panel reveal" id="unlock-panel">
+        <span class="card-emoji" aria-hidden="true">🔐</span>
+        <span class="card-kicker">Locked</span>
+        <h2 id="unlock-title">Crack the code</h2>
+
+        <form id="unlock-form" novalidate>
+          <p>Prove you're worthy (and old enough) by typing the secret password.</p>
+          <label for="secret">Secret password</label>
+          <div class="unlock-row">
+            <input id="secret" name="secret" type="text" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Type it here">
+            <button class="btn" type="submit">Unlock</button>
+          </div>
+          <button class="link-btn" id="hint-btn" type="button" aria-expanded="false" aria-controls="hint">Need a hint?</button>
+          <p class="hint" id="hint" hidden></p>
+          <p class="unlock-msg" id="unlock-msg" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="unlock-countdown" id="unlock-countdown" hidden>
+          <p class="unlock-countdown-text"></p>
+          <div class="countdown" aria-live="off"></div>
+        </div>
+
+        <div class="surprise-reveal" id="surprise-reveal" hidden>
+          <h2 class="surprise-title" tabindex="-1">Surprise!</h2>
+          <p class="surprise-text"></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="container next-step reveal">
+      <p>Now let's look at the evidence...</p>
+      <a class="btn btn-big" href="gallery.html">To the gallery <span aria-hidden="true">→</span></a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Made with love (and age jokes) by <span data-from>Your Name</span></p>
+  </footer>
+</body>
+</html>
