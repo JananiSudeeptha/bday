@@ -17,7 +17,7 @@ const CARD_CONFIG = {
 
   // Optional recording. If this file is missing, the site plays its own
   // little "Happy Birthday" tune instead, so nothing breaks.
-  song: "assets/music/happy-birthday.mp3",
+  song: "assets/music/song.mp3",
 };
 
 /* ==========================================================================

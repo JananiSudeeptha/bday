@@ -29,7 +29,7 @@ const SITE = {
 
   // Background music (optional). Drop an mp3 at this path. If it's missing,
   // the music button just shows a friendly message instead of breaking.
-  musicFile: "assets/music/song.mp3",
+  musicFile: "assets/music/happy-birthday-song-upan-dinaya-ada-obage-centigradz.mp3",
 
   // ---- HOME: countdown messages -----------------------------------------
   countdown: {
@@ -220,14 +220,26 @@ const SITE = {
     function getAudio() {
       if (audio) return audio;
       audio = new Audio(SITE.musicFile);
-      audio.loop = true;
+      audio.loop = false;
       audio.volume = 0.5;
+      audio.muted = false;
       audio.preload = "auto";
+      audio.autoplay = true;
+      audio.addEventListener("timeupdate", function () {
+        if (!playing || !audio || audio.currentTime < 60) return;
+        audio.pause();
+        audio.currentTime = 0;
+        if (playing) {
+          const p = audio.play();
+          if (p && p.catch) p.catch(function () {});
+        }
+      });
+      // Keep the long birthday song looping every 60 seconds.
       audio.addEventListener("error", function () {
         missing = true;
         playing = false;
         render();
-        store("bday-music", null);
+        store("bday-music", "1");
         toast("No song found yet. Add one at " + SITE.musicFile + " 🎵");
       });
       return audio;
@@ -238,6 +250,7 @@ const SITE = {
         toast("No song found yet. Add one at " + SITE.musicFile + " 🎵");
         return;
       }
+      if (playing) return;
       const a = getAudio();
       const t = parseFloat(store("bday-music-time"));
       if (t && !a.currentTime) {
@@ -252,6 +265,7 @@ const SITE = {
         }).catch(function (err) {
           playing = false;
           render();
+          store("bday-music", "1");
           if (!silentFail && !missing && err && err.name === "NotAllowedError") {
             toast("Your browser blocked the music. Tap the button again!");
           }
@@ -259,41 +273,50 @@ const SITE = {
       } else {
         playing = true;
         render();
+        store("bday-music", "1");
       }
     }
 
     btn.addEventListener("click", function () {
       if (playing) {
-        audio.pause();
+        if (audio) audio.pause();
         playing = false;
         render();
-        store("bday-music", null);
+        store("bday-music", "0");
       } else {
         play(false);
       }
     });
 
-    // The birthday card can pause the background music while it sings
-    let pausedByCard = false;
+    // The background music pauses when another sound starts and resumes once that sound ends.
+    let pausedByExternalSound = false;
     window.Bday.pauseMusic = function () {
       if (playing && audio) {
         audio.pause();
         playing = false;
-        pausedByCard = true;
+        pausedByExternalSound = true;
         render();
       }
     };
     window.Bday.resumeMusic = function () {
-      if (!pausedByCard) return;
-      pausedByCard = false;
-      play(true);
+      if (!pausedByExternalSound) return;
+      pausedByExternalSound = false;
+      const pref = store("bday-music");
+      if (pref === "1" || pref === null) {
+        play(true);
+      }
     };
 
     // Keep the song going (roughly) when moving between pages
     window.addEventListener("pagehide", function () {
       if (audio && playing) store("bday-music-time", String(audio.currentTime));
     });
-    if (store("bday-music") === "1") play(true);
+
+    const storedPref = store("bday-music");
+    if (storedPref === "0") {
+      store("bday-music", "1");
+    }
+    play(true);
     render();
   }
 
@@ -512,6 +535,7 @@ const SITE = {
     let scanLineDirection = 1;
 
     function startScannerSound() {
+      if (window.Bday && window.Bday.pauseMusic) window.Bday.pauseMusic();
       try {
         const AudioCtor = window.AudioContext || window.webkitAudioContext;
         if (!AudioCtor) return;
@@ -531,18 +555,18 @@ const SITE = {
           osc.stop(scannerAudioCtx.currentTime + duration + 0.02);
         }
 
-        const pattern = [1800, 2200, 2600, 1800, 2200, 2600];
+        const pattern = [1800, 2200, 2600, 1800, 2200, 2600, 3100, 2300];
         let patternIndex = 0;
         pattern.forEach(function (freq, index) {
           setTimeout(function () {
-            playBeep(freq, 0.06, 0.02);
-          }, index * 90);
+            playBeep(freq, 0.08, 0.08);
+          }, index * 75);
         });
 
         scannerToneTimer = setInterval(function () {
-          playBeep(pattern[patternIndex % pattern.length], 0.05, 0.02);
+          playBeep(pattern[patternIndex % pattern.length], 0.07, 0.08);
           patternIndex += 1;
-        }, 150);
+        }, 120);
       } catch (error) {
         /* Audio may be blocked or unavailable; continue without it. */
       }
@@ -553,6 +577,7 @@ const SITE = {
         clearInterval(scannerToneTimer);
         scannerToneTimer = null;
       }
+      if (window.Bday && window.Bday.resumeMusic) window.Bday.resumeMusic();
     }
 
     function startScanSweep() {
