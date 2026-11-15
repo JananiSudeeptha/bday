@@ -231,6 +231,36 @@ main {
 .music-btn[aria-pressed="true"] { background: var(--grad); color: var(--white); border-color: transparent; box-shadow: var(--glow); }
 .music-btn[aria-pressed="true"] .music-icon { animation: bob 1.1s ease-in-out infinite; }
 
+.music-unlock {
+  position: fixed;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translateX(-50%) translateY(120%);
+  z-index: 70;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.7rem 1.25rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--grad);
+  color: var(--white);
+  font: 700 0.88rem/1 var(--font-body);
+  letter-spacing: 0.02em;
+  box-shadow: var(--glow);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.music-unlock.is-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
 .nav-toggle {
   display: none;
   width: 40px;

@@ -207,15 +207,29 @@ const SITE = {
   /* ---------- Music ---------- */
   function setupMusic() {
     const btn = document.querySelector("[data-music-toggle]");
+    const unlockBtn = document.querySelector("[data-music-unlock]");
     if (!btn) return;
     const label = btn.querySelector(".music-label");
     let audio = null;
     let playing = false;
     let missing = false;
 
+    function showUnlockPrompt(show, text) {
+      if (!unlockBtn) return;
+      if (text) unlockBtn.textContent = text;
+      unlockBtn.classList.toggle("is-visible", !!show);
+    }
+
     function render() {
       btn.setAttribute("aria-pressed", playing ? "true" : "false");
       if (label) label.textContent = playing ? "Music on" : "Music off";
+      if (playing) showUnlockPrompt(false);
+    }
+
+    function unlockFromGesture() {
+      if (playing) return;
+      showUnlockPrompt(false);
+      play(false);
     }
 
     function getAudio() {
@@ -267,8 +281,9 @@ const SITE = {
           playing = false;
           render();
           store("bday-music", "1");
+          showUnlockPrompt(true, "Tap to unlock the birthday song");
           if (!silentFail && !missing && err && err.name === "NotAllowedError") {
-            toast("Your browser blocked the music. Tap the button again!");
+            toast("Your browser blocked the music. Tap the page to unlock it!");
           }
         });
       } else {
@@ -285,9 +300,19 @@ const SITE = {
         render();
         store("bday-music", "0");
       } else {
-        play(false);
+        unlockFromGesture();
       }
     });
+
+    if (unlockBtn) {
+      unlockBtn.addEventListener("click", function () {
+        unlockFromGesture();
+      });
+    }
+
+    document.addEventListener("pointerdown", unlockFromGesture, { once: true, passive: true });
+    document.addEventListener("touchstart", unlockFromGesture, { once: true, passive: true });
+    document.addEventListener("keydown", unlockFromGesture, { once: true });
 
     // The background music pauses when another sound starts and resumes once that sound ends.
     let pausedByExternalSound = false;
