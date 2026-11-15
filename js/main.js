@@ -25,7 +25,7 @@ const SITE = {
 
   // Photo shown on the ID card in the age scanner. If the file is missing,
   // a stylish silhouette is shown instead.
-  scanPhoto: "assets/photos/photo1.jpg",
+  scanPhoto: "assets/photos/scan.JPG",
 
   // Background music (optional). Drop an mp3 at this path. If it's missing,
   // the music button just shows a friendly message instead of breaking.
