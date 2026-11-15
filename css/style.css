@@ -1552,11 +1552,34 @@ main {
 @media (max-width: 600px) {
   .bcard-wrap {
     justify-content: flex-start;
-    overflow: visible;
+    overflow-x: hidden;
+    overflow-y: hidden;
     max-height: none;
     padding: 0.5rem 0 1rem;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
+    scrollbar-width: none;
+    touch-action: pan-x;
+  }
+
+  .bcard-wrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  .bcard-wrap.is-open {
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    scrollbar-color: rgba(123, 90, 160, 0.55) transparent;
+  }
+
+  .bcard-wrap.is-open::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .bcard-wrap.is-open::-webkit-scrollbar-thumb {
+    background: rgba(123, 90, 160, 0.55);
+    border-radius: 999px;
   }
 
   .bcard {
@@ -1570,36 +1593,57 @@ main {
     overflow: visible;
   }
 
-  .bcard-inside,
-  .bcard-cover,
-  .bcard-face,
-  .bcard-cover-back {
-    width: 100%;
+  .bcard-wrap.is-open .bcard {
+    display: flex;
+    width: 760px;
+    min-width: 760px;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .bcard-wrap.is-open .bcard-inside,
+  .bcard-wrap.is-open .bcard-cover,
+  .bcard-wrap.is-open .bcard-face,
+  .bcard-wrap.is-open .bcard-cover-back {
+    width: 380px;
+    min-width: 380px;
     min-height: 760px;
-    height: auto;
+    height: 760px;
   }
 
-  .bcard-cover {
-    position: absolute;
-    inset: 0;
-    transform-origin: left center;
+  .bcard-wrap.is-open .bcard-cover {
+    position: relative;
+    inset: auto;
+    transform: none;
+    box-shadow: none;
+    order: -1;
+    border-radius: 26px;
   }
 
-  .bcard.is-open .bcard-cover {
-    transform: rotateY(-165deg) translateX(-8px) skewY(-1.8deg);
-    box-shadow: 0 0 0 rgba(76, 29, 122, 0);
+  .bcard-wrap.is-open .bcard-cover-front {
+    display: none;
   }
 
-  .bcard-cover-back {
-    position: absolute;
-    inset: 0;
-    height: 500px;
-    min-height: 500px;
-    max-height: 500px;
+  .bcard-wrap.is-open .bcard-cover-back {
+    position: relative;
+    inset: auto;
+    transform: none;
+    height: 100%;
+    min-height: 100%;
+    max-height: none;
     padding: 1rem 1rem 120px;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .bcard-wrap.is-open .bcard-inside {
+    position: relative;
+    z-index: 1;
+  }
+
+  .bcard-wrap.is-open .bcard.is-open .bcard-cover {
+    transform: none;
   }
 }
 

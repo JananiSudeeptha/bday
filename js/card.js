@@ -13,7 +13,7 @@ const CARD_CONFIG = {
   banner: "HAPPY BIRTHDAY",
 
   title: "Happy Birthday, {name}!",
-  message: "Thirty-three laps around the sun and not a single wrinkle to show for it. Save the date below. It's a big one.",
+  message: "It's been 33 years since Amma and Thaththa received their precious little pearl 🤍👶. Here's to another cheerful year of treating them like royalty, showering them with love, and giving them the prince and princess treatment they truly deserve! 👑❤️",
 
   // Optional recording. If this file is missing, the site plays its own
   // little "Happy Birthday" tune instead, so nothing breaks.
@@ -231,6 +231,14 @@ const CARD_CONFIG = {
   /* ---------- Open / close ---------- */
   function setOpen(open) {
     card.classList.toggle("is-open", open);
+    const wrap = card.parentElement;
+    if (wrap) {
+      wrap.classList.toggle("is-open", open);
+      if (open) {
+        wrap.scrollLeft = 0;
+        wrap.scrollTo({ left: 0, behavior: "instant" });
+      }
+    }
     cover.setAttribute("aria-expanded", open ? "true" : "false");
     inside.setAttribute("aria-hidden", open ? "false" : "true");
     inside.inert = !open; // keep the buttons inside unreachable while the card is shut
