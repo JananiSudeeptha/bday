@@ -1399,6 +1399,8 @@ main {
   position: absolute;
   inset: 0;
   z-index: 2;
+  width: 100%;
+  height: 100%;
   padding: 0;
   border: 0;
   background: none;
@@ -1439,9 +1441,15 @@ main {
   box-shadow: 0 0 0 rgba(76, 29, 122, 0);
   pointer-events: none;
 }
+.bcard-inside {
+  position: relative;
+  z-index: 1;
+}
 .bcard-face {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1453,6 +1461,7 @@ main {
   overflow: hidden;
 }
 .bcard-cover-front {
+  overflow: hidden;
   justify-content: center;
   align-items: center;
   gap: 0.2rem;
@@ -1505,6 +1514,8 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
   background:
     linear-gradient(180deg, rgba(255,255,255,0.62), rgba(255,255,255,0.22)),
     repeating-linear-gradient(0deg, rgba(140, 109, 182, 0.035), rgba(140, 109, 182, 0.035) 2px, rgba(255,255,255,0.12) 2px, rgba(255,255,255,0.12) 4px),
@@ -1512,11 +1523,15 @@ main {
   border: 1.5px solid rgba(119, 89, 65, 0.16);
   transform: rotateY(180deg);
   padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 .bcard-cover-back-art {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  min-height: 100%;
   object-fit: contain;
   border-radius: 18px;
   background: rgba(255,255,255,0.18);
@@ -1537,18 +1552,54 @@ main {
 @media (max-width: 600px) {
   .bcard-wrap {
     justify-content: flex-start;
-    overflow-x: auto;
-    overflow-y: visible;
+    overflow: visible;
+    max-height: none;
     padding: 0.5rem 0 1rem;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
-    scroll-snap-type: x proximity;
   }
 
   .bcard {
+    position: relative;
     width: min(100%, 520px);
-    min-width: 360px;
+    min-width: 0;
+    height: auto;
+    min-height: 760px;
     flex: 0 0 auto;
+    align-self: flex-start;
+    overflow: visible;
+  }
+
+  .bcard-inside,
+  .bcard-cover,
+  .bcard-face,
+  .bcard-cover-back {
+    width: 100%;
+    min-height: 760px;
+    height: auto;
+  }
+
+  .bcard-cover {
+    position: absolute;
+    inset: 0;
+    transform-origin: left center;
+  }
+
+  .bcard.is-open .bcard-cover {
+    transform: rotateY(-165deg) translateX(-8px) skewY(-1.8deg);
+    box-shadow: 0 0 0 rgba(76, 29, 122, 0);
+  }
+
+  .bcard-cover-back {
+    position: absolute;
+    inset: 0;
+    height: 500px;
+    min-height: 500px;
+    max-height: 500px;
+    padding: 1rem 1rem 120px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
