@@ -577,19 +577,20 @@ main {
 .is-error .corner { border-color: var(--berry); }
 .scan-line {
   position: absolute;
-  left: 8px; right: 8px; top: 6%;
+  left: 8px; right: 8px; top: 12px;
   height: 5px;
   z-index: 2;
   border-radius: 999px;
+  display: block;
   background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,0.8) 12%, rgba(168,85,247,1) 50%, rgba(255,255,255,0.8) 88%, rgba(255,255,255,0));
   box-shadow: 0 0 18px 6px rgba(168, 85, 247, 0.7), 0 0 0 1px rgba(255,255,255,0.4);
   opacity: 0;
   pointer-events: none;
-  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
 }
 .is-scanning .scan-line {
   opacity: 1;
-  animation: scan 1.05s ease-in-out infinite alternate;
+  animation: scan 1s ease-in-out infinite;
 }
 .is-error .idcard-photo { animation: shake 0.5s ease; }
 
@@ -1168,9 +1169,10 @@ main {
 @keyframes hop { 0%, 100% { translate: 0 0; } 40% { translate: 0 -8px; } }
 @keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -2px; } }
 @keyframes scan {
-  0% { top: 4%; opacity: 0.8; }
-  50% { opacity: 1; }
-  100% { top: 94%; opacity: 0.9; }
+  0% { opacity: 0.2; transform: translate3d(0, 0, 0); }
+  15% { opacity: 1; }
+  50% { opacity: 1; transform: translate3d(0, 150px, 0); }
+  100% { opacity: 0.2; transform: translate3d(0, 0, 0); }
 }
 @keyframes drop-in { from { opacity: 0; translate: 0 -6px; } to { opacity: 1; translate: 0 0; } }
 
