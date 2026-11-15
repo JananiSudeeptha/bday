@@ -76,7 +76,7 @@ const SITE = {
   letter: {
     greeting: "Dear {name},",
     paragraphs: [
-      "Thirty-three. I've checked the maths three times and I still don't believe it, because somehow you look younger than your age and somehow even more charming. Whatever deal you made with time, I hope the fine print is reasonable.",
+      "Thirty-three. I've stared at your recent photos, and I still don't believe it, because somehow you look younger than your age and somehow even more charming. Whatever deal you made with time, I hope the fine print is reasonable.",
       "But beneath all the jokes, what stands out most is who you are. Your innocence, your decency, your quiet consistency, and the way you communicate with such comfort and honesty are rare qualities. You make conversations feel easy, you listen without judging, and you remember small things that make people feel seen.",
       "That kind of presence is a gift. I admire the way you carry yourself, the way you make people feel at ease, and the calm sincerity that makes you easy to trust. I hope this year brings you the kind of happiness that matches your heart and the kind of love that feels natural, gentle, and truly right for you.",
       "Happy birthday. May this year be full of peace, laughter, meaningful moments, and the beautiful kind of love that finds you when it should.",

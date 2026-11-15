@@ -32,7 +32,7 @@ const GIFT_CONFIG = {
     // After this many wrong guesses the box stays shut and he gets teased instead
     giveUpAfter: 5,
     giveUpTitle: "Okay, okay…",
-    giveUpText: "Five tries? Adorable. The box stays shut. The gift will be revealed at our first meetup, so you'll just have to show up and find out in person. No spoilers, old man. 😉",
+    giveUpText: "Five tries? Adorable. The box stays shut. The gift will be revealed at our first meetup, so you'll just have to show up and find out in person. No spoilers kiddo. 😉",
 
     // Shown once the box opens
     revealTitle: "Surprise!",

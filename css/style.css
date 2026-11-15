@@ -987,6 +987,16 @@ main {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
 }
+@media (max-width: 600px) {
+  .polaroid-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .polaroid {
+    width: min(100%, 360px);
+    margin: 0 auto;
+  }
+}
 @media (min-width: 640px) { .polaroid-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.75rem; } }
 
 .polaroid { position: relative; }
@@ -1524,6 +1534,24 @@ main {
 }
 
 /* bunting: one letter per flag */
+@media (max-width: 600px) {
+  .bcard-wrap {
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 0.5rem 0 1rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scroll-snap-type: x proximity;
+  }
+
+  .bcard {
+    width: min(100%, 520px);
+    min-width: 360px;
+    flex: 0 0 auto;
+  }
+}
+
 .bcard.is-open .banner-flag {
   animation: swing 2.8s ease-in-out infinite alternate;
   animation-delay: var(--flag-delay);
